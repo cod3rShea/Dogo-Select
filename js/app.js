@@ -13,6 +13,13 @@ fetch(
     data => generateImage(data.message)
 );
 
+fetch(
+    'https://dog.ceo/api/breeds/list'
+).then (
+    response => response.json()
+).then(
+    data => generateOptions(data.message)
+);
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
@@ -24,6 +31,14 @@ function generateImage(data) {
     card.innerHTML = html;
 }
 
+function generateOptions(data) {
+    
+    const options = data.map(item => {
+        return `<option value="${item}">${item}</option>`;
+    });
+
+    select.innerHTML = options;
+}
 
 // ------------------------------------------
 //  EVENT LISTENERS
