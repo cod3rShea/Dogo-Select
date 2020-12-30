@@ -10,14 +10,19 @@ fetch(
 ).then(
      response => response.json()
 ).then (
-    data => console.log(data)
+    data => generateImage(data.message)
 );
 
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
 // ------------------------------------------
-
+function generateImage(data) {
+    const html = `
+        <img src='${data}'>
+    `;
+    card.innerHTML = html;
+}
 
 
 // ------------------------------------------
