@@ -5,26 +5,30 @@ const form = document.querySelector('form');
 // ------------------------------------------
 //  FETCH FUNCTIONS
 // ------------------------------------------
-fetch(
+function fetchData(url) {
+    return fetch(url)
+        .then( response => response.json() )
+}
+
+fetchData(
     'https://dog.ceo/api/breeds/image/random'
-).then(
-     response => response.json()
 ).then (
     data => generateImage(data.message)
 );
 
-fetch(
+fetchData(
     'https://dog.ceo/api/breeds/list'
-).then (
-    response => response.json()
 ).then(
     data => generateOptions(data.message)
 );
+
+
 
 // ------------------------------------------
 //  HELPER FUNCTIONS
 // ------------------------------------------
 function generateImage(data) {
+    console.log(data);
     const html = `
         <img src='${data}'>
     `;
@@ -32,7 +36,6 @@ function generateImage(data) {
 }
 
 function generateOptions(data) {
-    
     const options = data.map(item => {
         return `<option value="${item}">${item}</option>`;
     }).join("");
