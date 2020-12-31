@@ -7,7 +7,14 @@ const form = document.querySelector('form');
 // ------------------------------------------
 function fetchData(url) {
     return fetch(url)
-        .then( response => response.json() )
+        .then(
+            checkStatus
+        )
+        .then( 
+            response => response.json() 
+        ).catch(
+            error => console.log('Looks like there was an error', error)
+        );
 }
 
 fetchData(
@@ -26,11 +33,20 @@ fetchData(
 // ------------------------------------------
 //  HELPER FUNCTIONS
 // ------------------------------------------
+function checkStatus(response) {
+    if (response.ok) {
+        return Promise.resolve(response);
+    } else {
+        return Promise.reject( new Error(response.statusText) );
+    }
+}
+
 function generateImage(data) {
     const html = `
-        <img src='${data}' alt>
+        <img class="img-responsive" src='${data}' alt>
         <p>Click to view images of ${select.value}</p>
     `;
+    console.log(data);
     card.innerHTML = html;
 }
 

@@ -170,6 +170,11 @@ sup {
 img {
   border-style: none; }
 
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  display:block }
+
 /**
  * Hide the overflow in IE.
  */
